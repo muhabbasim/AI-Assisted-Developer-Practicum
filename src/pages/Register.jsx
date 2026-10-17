@@ -83,7 +83,7 @@ function Register() {
                 placeholder="******" />
               {errors.confirmPassword && <p className="text-primary text-xs mt-2">{errors.confirmPassword}</p>}
             </div>
-            <button type="submit" className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md">
+            <button type="submit" className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer">
               Register
             </button>
             <p className="text-center text-sm text-text-secondary pt-4">

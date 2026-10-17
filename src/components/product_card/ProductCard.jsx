@@ -29,7 +29,7 @@ function ProductCard({ product }) {
   return (
     <div className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all duration-500 hover:shadow-xl h-full">
       {/* Product Image - Compact premium aspect ratio */}
-      <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-gray-50">
+      <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-gray-50 cursor-pointer">
         <img
           src={product.image}
           alt={product.title}
@@ -53,7 +53,7 @@ function ProductCard({ product }) {
         </span>
         
         {/* Title */}
-        <Link to={`/product/${product.id}`} className="mb-3">
+        <Link to={`/product/${product.id}`} className="mb-3 cursor-pointer">
           <h3 className="text-sm font-medium text-gray-900 line-clamp-2 leading-relaxed group-hover:text-primary transition-colors duration-300 min-h-[2.5rem]">
             {product.title}
           </h3>
@@ -78,7 +78,7 @@ function ProductCard({ product }) {
             type="button"
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="w-full bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium py-3 rounded-xl tracking-wide transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-900 flex items-center justify-center gap-2"
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium py-3 rounded-xl tracking-wide transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-900 flex items-center justify-center gap-2 cursor-pointer"
             aria-busy={isAdding}
           >
             {isAdding ? (

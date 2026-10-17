@@ -26,7 +26,7 @@ function QuantityStepper({ initialValue = 1, onQuantityChange }) {
       <button
         type="button"
         onClick={decrement}
-        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base"
+        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base cursor-pointer"
         aria-label="Decrease quantity"
       >
         &minus;
@@ -41,7 +41,7 @@ function QuantityStepper({ initialValue = 1, onQuantityChange }) {
       <button
         type="button"
         onClick={increment}
-        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base"
+        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base cursor-pointer"
         aria-label="Increase quantity"
       >
         &#43;

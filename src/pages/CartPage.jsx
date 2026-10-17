@@ -14,7 +14,7 @@ function CartPage() {
             <p className="text-base text-text-secondary leading-relaxed">Start adding products to your cart.</p>
             <Link
               to="/"
-              className="inline-block bg-primary hover:bg-primary-dark text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
+              className="inline-block bg-primary hover:bg-primary-dark text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
             >
               Continue Shopping
             </Link>
@@ -40,7 +40,7 @@ function CartPage() {
                 }`}
               >
                 {/* Product Image */}
-                <Link to={`/product/${item.product.id}`} className="flex-shrink-0">
+                <Link to={`/product/${item.product.id}`} className="flex-shrink-0 cursor-pointer">
                   <div className="w-full sm:w-32 h-32 bg-warm-ivory rounded-xl overflow-hidden">
                     <img
                       src={item.product.image}
@@ -55,7 +55,7 @@ function CartPage() {
                   <div>
                     <Link
                       to={`/product/${item.product.id}`}
-                      className="text-base font-medium text-text-primary hover:text-primary transition-colors"
+                      className="text-base font-medium text-text-primary hover:text-primary transition-colors cursor-pointer"
                     >
                       {item.product.title}
                     </Link>
@@ -81,7 +81,7 @@ function CartPage() {
                 <button
                   type="button"
                   onClick={() => removeItem(item.product.id)}
-                  className="text-text-tertiary hover:text-primary text-sm font-medium self-start sm:self-center transition-colors px-3 py-2 rounded-lg hover:bg-warm"
+                  className="text-text-tertiary hover:text-primary text-sm font-medium self-start sm:self-center transition-colors px-3 py-2 rounded-lg hover:bg-warm cursor-pointer"
                 >
                   Remove
                 </button>
@@ -113,12 +113,12 @@ function CartPage() {
               <button
                 type="button"
                 onClick={checkout}
-                className="w-full bg-primary hover:bg-primary-dark text-white py-4 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
+                className="w-full bg-primary hover:bg-primary-dark text-white py-4 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
               >
                 Proceed to Checkout
               </button>
 
-              <Link to="/" className="block text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-white">
+              <Link to="/" className="block text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-white cursor-pointer">
                 ← Continue Shopping
               </Link>
             </div>

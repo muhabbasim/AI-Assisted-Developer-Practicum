@@ -94,14 +94,14 @@ function Login() {
 
             <button
               type="submit"
-              className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md"
+              className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer"
             >
               Login
             </button>
 
             <p className="text-center text-sm text-text-secondary pt-4">
               Don't have an account?{' '}
-              <Link to="/register" className="text-primary hover:text-primary-dark font-medium">
+              <Link to="/register" className="text-primary hover:text-primary-dark font-medium cursor-pointer">
                 Register
               </Link>
             </p>

@@ -23,13 +23,13 @@ function Footer() {
           <div className="space-y-5">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white/90">Quick Links</h3>
             <nav className="flex flex-col gap-3">
-              <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors w-fit">
+              <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors w-fit cursor-pointer">
                 Home
               </Link>
-              <Link to="/cart" className="text-sm text-white/70 hover:text-white transition-colors w-fit">
+              <Link to="/cart" className="text-sm text-white/70 hover:text-white transition-colors w-fit cursor-pointer">
                 Shopping Cart
               </Link>
-              <Link to="/login" className="text-sm text-white/70 hover:text-white transition-colors w-fit">
+              <Link to="/login" className="text-sm text-white/70 hover:text-white transition-colors w-fit cursor-pointer">
                 Account
               </Link>
             </nav>

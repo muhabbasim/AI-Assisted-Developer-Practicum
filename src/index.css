@@ -1,8 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #183D32;
+  --color-primary-dark: #0F2920;
+  --color-primary-light: #234D3F;
+  
+  --color-sage: #A8B5A0;
+  --color-sage-light: #BCC9B5;
+  --color-sage-dark: #93A08B;
+  
+  --color-warm: #F8F8F3;
+  --color-warm-ivory: #EFEFE6;
+  
+  --color-lime: #C5E86C;
+  --color-lime-light: #D4F08C;
+  --color-lime-dark: #B5D85C;
+  
+  --color-text-primary: #20231F;
+  --color-text-secondary: #5A5D58;
+  --color-text-tertiary: #898C87;
+  
+  --color-border: #E2E4DC;
+  --color-border-light: #EEEFE8;
+  
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
+  
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+}
 
 @layer base {
   body {
@@ -21,19 +47,6 @@
 @layer components {
   .container {
     @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
-  }
-  
-  /* Premium button styles */
-  .btn-primary {
-    @apply bg-primary text-white px-6 py-3 rounded-lg text-sm font-medium tracking-wide;
-    @apply transition-all duration-300 hover:bg-primary-dark;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-  
-  .btn-secondary {
-    @apply bg-transparent text-primary border border-primary px-6 py-3 rounded-lg text-sm font-medium;
-    @apply transition-all duration-300 hover:bg-primary hover:text-white;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
   
   /* Premium input styles */
@@ -75,11 +88,6 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary;
-  }
-  
-  /* Divider utility */
-  .divider-subtle {
-    @apply border-border;
   }
 
   /* Toast animations */

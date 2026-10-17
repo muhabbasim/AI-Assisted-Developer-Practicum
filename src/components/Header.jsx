@@ -6,7 +6,7 @@ function Header({ cartCount = 0 }) {
       <div className="container">
         <div className="flex justify-between items-center h-16 sm:h-18">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group cursor-pointer">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-primary-dark group-hover:scale-105">
               <div className="w-5 h-5 bg-lime rounded-sm"></div>
             </div>
@@ -22,13 +22,13 @@ function Header({ cartCount = 0 }) {
           <nav className="flex items-center gap-2 sm:gap-4">
             <Link 
               to="/" 
-              className="text-sm font-medium text-text-secondary hover:text-primary transition-colors hidden sm:block px-4 py-2 rounded-lg hover:bg-warm"
+              className="text-sm font-medium text-text-secondary hover:text-primary transition-colors hidden sm:block px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
             >
               Home
             </Link>
             <Link 
               to="/cart" 
-              className="relative text-sm font-medium bg-primary text-white px-5 sm:px-6 py-2.5 rounded-lg transition-all duration-300 hover:bg-primary-dark shadow-sm hover:shadow-md"
+              className="relative text-sm font-medium bg-primary text-white px-5 sm:px-6 py-2.5 rounded-lg transition-all duration-300 hover:bg-primary-dark shadow-sm hover:shadow-md cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>

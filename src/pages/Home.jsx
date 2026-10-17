@@ -54,7 +54,7 @@ function Home() {
                     key={cat}
                     type="button"
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 ${
+                    className={`px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 cursor-pointer ${
                       selectedCategory === cat
                         ? 'bg-primary text-white shadow-md'
                         : 'bg-transparent text-text-secondary border border-border hover:border-primary hover:text-primary hover:shadow-sm'
@@ -93,7 +93,7 @@ function Home() {
                   setSearch('');
                   setSelectedCategory('All');
                 }}
-                className="bg-primary text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 hover:bg-primary-dark shadow-sm hover:shadow-md"
+                className="bg-primary text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 hover:bg-primary-dark shadow-sm hover:shadow-md cursor-pointer"
               >
                 Clear all filters
               </button>

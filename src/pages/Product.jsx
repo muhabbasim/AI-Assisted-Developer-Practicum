@@ -17,7 +17,7 @@ function Product() {
         <div className="container py-16">
           <div className="text-center bg-white rounded-2xl border border-border p-12 max-w-md mx-auto shadow-sm">
             <h2 className="text-2xl font-medium text-text-primary mb-4">Product not found</h2>
-            <Link to="/" className="text-primary hover:text-primary-dark font-medium inline-flex items-center gap-2">
+            <Link to="/" className="text-primary hover:text-primary-dark font-medium inline-flex items-center gap-2 cursor-pointer">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
@@ -102,7 +102,7 @@ function Product() {
                 type="button"
                 onClick={handleAddToCart}
                 disabled={isAdding}
-                className="w-full bg-primary hover:bg-primary-dark text-white text-base font-medium py-4 rounded-lg tracking-wide transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-primary flex items-center justify-center gap-2 min-h-[56px]"
+                className="w-full bg-primary hover:bg-primary-dark text-white text-base font-medium py-4 rounded-lg tracking-wide transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-primary flex items-center justify-center gap-2 min-h-[56px] cursor-pointer"
                 aria-busy={isAdding}
               >
                 {isAdding ? (
@@ -137,7 +137,7 @@ function Product() {
 
               <Link 
                 to="/" 
-                className="text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-warm inline-flex items-center justify-center gap-2"
+                className="text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-warm inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

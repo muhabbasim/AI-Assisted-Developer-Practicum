@@ -14,7 +14,7 @@ function Slider({ imageSrc }) {
             <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-md">
               Discover carefully curated headphones, earbuds, and audio equipment that elevate your listening experience.
             </p>
-            <button className="mt-6 bg-primary text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 hover:bg-primary-dark inline-flex items-center gap-2 group shadow-sm hover:shadow-md">
+            <button className="mt-6 bg-primary text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 hover:bg-primary-dark inline-flex items-center gap-2 group shadow-sm hover:shadow-md cursor-pointer">
               Explore Collection
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
