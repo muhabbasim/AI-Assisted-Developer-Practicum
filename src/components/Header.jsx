@@ -8,13 +8,15 @@ function Header({ cartCount = 0 }) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group cursor-pointer">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-primary-dark group-hover:scale-105">
-              <div className="w-5 h-5 bg-lime rounded-sm"></div>
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
             </div>
             <div className="hidden sm:flex flex-col">
               <span className="text-base font-semibold text-text-primary tracking-tight leading-none">
-                Beautiful Store
+                PageTurner Books
               </span>
-              <span className="text-xs text-text-tertiary font-normal mt-0.5">Premium Audio</span>
+              <span className="text-xs text-text-tertiary font-normal mt-0.5">Curated Reads</span>
             </div>
           </Link>
 

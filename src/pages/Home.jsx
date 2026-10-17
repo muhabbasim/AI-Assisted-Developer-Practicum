@@ -8,22 +8,25 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
 
-  // Get featured product (first product with sale price)
-  const featuredProduct = products.find(p => p.salePrice) || products[0];
+  // Get featured book (first product with featured flag, then sale price, or first)
+  const featuredProduct = products.find(p => p.featured) || products.find(p => p.salePrice) || products[0];
 
   const filtered = products.filter((p) => {
     const matchCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = 
+      p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.author.toLowerCase().includes(search.toLowerCase()) ||
+      p.category.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchSearch;
   });
 
   return (
     <main className="w-full flex-auto">
       <div className="container py-8 sm:py-10">
-        {/* Premium Hero Section */}
+        {/* Literary Hero Section */}
         <div className="mb-12 sm:mb-16">
           <Slider 
-            imageSrc="https://images.unsplash.com/photo-1524883173980-67b26d34e82c?q=80&w=1740" 
+            imageSrc="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1740" 
             featuredProduct={featuredProduct}
           />
         </div>
@@ -69,7 +72,7 @@ function Home() {
             {(search || selectedCategory !== 'All') && (
               <div className="flex items-center gap-4 text-sm">
                 <p className="text-text-tertiary font-medium">
-                  {filtered.length} {filtered.length === 1 ? 'product' : 'products'} found
+                  {filtered.length} {filtered.length === 1 ? 'book' : 'books'} found
                 </p>
                 {(search || selectedCategory !== 'All') && (
                   <>
@@ -109,9 +112,9 @@ function Home() {
                   </svg>
                 </div>
                 
-                <p className="text-xl font-semibold text-text-primary mb-2">No products found</p>
+                <p className="text-xl font-semibold text-text-primary mb-2">No books found</p>
                 <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                  We couldn't find any products matching your search. Try adjusting your filters or search terms.
+                  We couldn't find any books matching your search. Try adjusting your filters or search terms.
                 </p>
                 
                 <button

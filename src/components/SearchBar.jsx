@@ -24,6 +24,7 @@ function SearchBar({ products, onSearch, searchValue }) {
       const filtered = products
         .filter(p => 
           p.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+          p.author.toLowerCase().includes(searchValue.toLowerCase()) ||
           p.category.toLowerCase().includes(searchValue.toLowerCase())
         )
         .slice(0, 5); // Show max 5 suggestions
@@ -69,12 +70,12 @@ function SearchBar({ products, onSearch, searchValue }) {
         {/* Input Field */}
         <input
           type="text"
-          placeholder="Search products, brands, and collections..."
+          placeholder="Search by title, author, ISBN, or topic..."
           value={searchValue}
           onChange={handleInputChange}
           onFocus={() => searchValue.trim() && suggestions.length > 0 && setIsOpen(true)}
           className="w-full pl-14 pr-14 py-4 bg-white border-2 border-border rounded-2xl text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 shadow-sm hover:shadow-md focus:shadow-lg"
-          aria-label="Search products"
+          aria-label="Search books"
           aria-expanded={isOpen}
           aria-controls="search-suggestions"
         />
@@ -110,7 +111,7 @@ function SearchBar({ products, onSearch, searchValue }) {
             {/* Results Header */}
             <div className="px-5 py-3 border-b border-border">
               <p className="text-xs uppercase tracking-[0.15em] text-text-tertiary font-semibold">
-                Suggested Products ({suggestions.length})
+                Suggested Books ({suggestions.length})
               </p>
             </div>
 
@@ -128,11 +129,11 @@ function SearchBar({ products, onSearch, searchValue }) {
                       onClick={handleSuggestionClick}
                       className="flex items-center gap-4 px-5 py-4 hover:bg-warm transition-all duration-200 cursor-pointer group"
                     >
-                      {/* Product Image */}
-                      <div className="w-14 h-14 bg-warm-ivory rounded-xl overflow-hidden flex-shrink-0 border border-border/50 relative">
+                      {/* Book Cover - Portrait */}
+                      <div className="w-12 h-18 bg-warm-ivory rounded-lg overflow-hidden flex-shrink-0 border border-border/50 relative shadow-sm">
                         <img 
                           src={product.image} 
-                          alt={product.title}
+                          alt={`${product.title} by ${product.author}`}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
                         {product.salePrice && (
@@ -142,14 +143,17 @@ function SearchBar({ products, onSearch, searchValue }) {
                         )}
                       </div>
 
-                      {/* Product Info */}
+                      {/* Book Info */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-text-tertiary font-semibold mb-1">
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-text-tertiary font-semibold mb-0.5">
                           {product.category}
                         </p>
-                        <h4 className="text-sm font-semibold text-text-primary mb-1 line-clamp-1 group-hover:text-primary transition-colors">
+                        <h4 className="text-sm font-semibold text-text-primary mb-0.5 line-clamp-1 group-hover:text-primary transition-colors">
                           {product.title}
                         </h4>
+                        <p className="text-xs text-text-secondary mb-1 line-clamp-1">
+                          by {product.author}
+                        </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-sm font-bold text-primary">
                             SAR {product.price.toFixed(2)}
@@ -200,8 +204,8 @@ function SearchBar({ products, onSearch, searchValue }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <p className="text-sm font-semibold text-text-primary mb-1">No products found</p>
-            <p className="text-xs text-text-tertiary">Try different keywords or browse all products</p>
+            <p className="text-sm font-semibold text-text-primary mb-1">No books found</p>
+            <p className="text-xs text-text-tertiary">Try different keywords or browse all books</p>
           </div>
         </div>
       )}
