@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { products, categories } from '../data/products';
 import ProductCard from '../components/product_card/ProductCard';
 import Slider from '../components/Slider';
+import SearchBar from '../components/SearchBar';
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
+
+  // Get featured product (first product with sale price)
+  const featuredProduct = products.find(p => p.salePrice) || products[0];
 
   const filtered = products.filter((p) => {
     const matchCategory = selectedCategory === 'All' || p.category === selectedCategory;
@@ -16,48 +20,43 @@ function Home() {
   return (
     <main className="w-full flex-auto">
       <div className="container py-8 sm:py-10">
-        {/* Slider/Hero */}
-        <div className="mb-10 sm:mb-14">
-          <Slider imageSrc="https://images.unsplash.com/photo-1524883173980-67b26d34e82c?q=80&w=1740" />
+        {/* Premium Hero Section */}
+        <div className="mb-12 sm:mb-16">
+          <Slider 
+            imageSrc="https://images.unsplash.com/photo-1524883173980-67b26d34e82c?q=80&w=1740" 
+            featuredProduct={featuredProduct}
+          />
         </div>
 
-        {/* Filter Section */}
-        <div className="bg-white rounded-2xl border border-border p-6 sm:p-8 mb-10 sm:mb-14 shadow-sm">
-          <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center">
-            {/* Search */}
-            <div className="w-full lg:flex-1">
-              <div className="relative">
-                <svg 
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 border border-border rounded-lg text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
+        {/* Premium Search & Filter Section */}
+        <div className="mb-12 sm:mb-16">
+          {/* Search Bar - Prominent & Refined */}
+          <div className="mb-8">
+            <div className="max-w-3xl mx-auto">
+              <SearchBar 
+                products={products} 
+                onSearch={setSearch}
+                searchValue={search}
+              />
             </div>
+          </div>
 
-            {/* Category Filters */}
-            <div className="w-full lg:w-auto">
-              <div className="flex gap-3 flex-wrap">
+          {/* Category Filters - Clean & Minimal */}
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex items-center gap-3">
+              <span className="text-xs uppercase tracking-[0.2em] text-text-tertiary font-semibold">
+                Filter by:
+              </span>
+              <div className="flex gap-2 flex-wrap justify-center">
                 {categories.map((cat) => (
                   <button
                     key={cat}
                     type="button"
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 cursor-pointer ${
+                    className={`px-5 py-2 text-sm font-semibold tracking-wide rounded-full transition-all duration-300 cursor-pointer ${
                       selectedCategory === cat
-                        ? 'bg-primary text-white shadow-md'
-                        : 'bg-transparent text-text-secondary border border-border hover:border-primary hover:text-primary hover:shadow-sm'
+                        ? 'bg-primary text-white shadow-md scale-105'
+                        : 'bg-white text-text-secondary border-2 border-border hover:border-primary hover:text-primary hover:shadow-sm'
                     }`}
                   >
                     {cat}
@@ -65,41 +64,73 @@ function Home() {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Results count */}
-          <div className="mt-6 pt-6 border-t border-border">
-            <p className="text-sm text-text-tertiary font-medium">
-              {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
-            </p>
+            {/* Results count - Refined */}
+            {(search || selectedCategory !== 'All') && (
+              <div className="flex items-center gap-4 text-sm">
+                <p className="text-text-tertiary font-medium">
+                  {filtered.length} {filtered.length === 1 ? 'product' : 'products'} found
+                </p>
+                {(search || selectedCategory !== 'All') && (
+                  <>
+                    <span className="text-border">•</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearch('');
+                        setSelectedCategory('All');
+                      }}
+                      className="text-primary font-semibold hover:text-primary-dark transition-colors cursor-pointer"
+                    >
+                      Clear filters
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Product Grid */}
-        {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20 bg-white rounded-2xl border border-border shadow-sm">
-            <div className="max-w-md mx-auto px-6">
-              <p className="text-xl font-medium text-text-primary mb-3">No products found</p>
-              <p className="text-sm text-text-secondary mb-8 leading-relaxed">Try adjusting your filters or search terms</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearch('');
-                  setSelectedCategory('All');
-                }}
-                className="bg-primary text-white px-8 py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 hover:bg-primary-dark shadow-sm hover:shadow-md cursor-pointer"
-              >
-                Clear all filters
-              </button>
+        {/* Product Grid with Scroll Anchor */}
+        <div id="products">
+          {filtered.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+              {filtered.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="text-center py-20 bg-white rounded-3xl border-2 border-border shadow-xl">
+              <div className="max-w-md mx-auto px-6">
+                {/* Empty State Icon */}
+                <div className="w-20 h-20 bg-warm-ivory rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                
+                <p className="text-xl font-semibold text-text-primary mb-2">No products found</p>
+                <p className="text-sm text-text-secondary mb-8 leading-relaxed">
+                  We couldn't find any products matching your search. Try adjusting your filters or search terms.
+                </p>
+                
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearch('');
+                    setSelectedCategory('All');
+                  }}
+                  className="bg-primary text-white px-8 py-4 text-sm font-semibold tracking-wide rounded-xl transition-all duration-300 hover:bg-primary-dark shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer inline-flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Reset all filters
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );
