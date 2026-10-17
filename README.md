@@ -1,8 +1,6 @@
-# E-Commerce Store
+# PageTurner Books - Online Bookstore
 
-> AI-Assisted Frontend Developer Practicum Assignment
-
-A modern, fully-featured e-commerce application built with **React**, **Vite**, and **Tailwind CSS**, demonstrating advanced React patterns, clean architecture, and professional development practices.
+A sophisticated, modern online bookstore built with React, featuring a curated collection of 32 books across multiple genres. This project showcases a premium reading destination with elegant design, intuitive discovery, and seamless shopping experience.
 
 ---
 
@@ -10,97 +8,68 @@ A modern, fully-featured e-commerce application built with **React**, **Vite**, 
 
 - [Overview](#overview)
 - [Features](#features)
-- [Architecture](#architecture)
 - [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
+- [Book Catalog](#book-catalog)
+- [Design System](#design-system)
 - [Project Structure](#project-structure)
-- [Key Components](#key-components)
-- [Development Approach](#development-approach)
-- [Assignment Requirements](#assignment-requirements)
-- [Documentation](#documentation)
+- [Architecture](#architecture)
+- [Customization](#customization)
+- [Deployment](#deployment)
 
 ---
 
 ## 🎯 Overview
 
-This project is a production-ready e-commerce platform developed as part of the **AI-Assisted Frontend Developer Practicum**. It showcases modern React development practices, including custom hooks, Context API for state management, and a component-driven architecture with complete separation of concerns.
+PageTurner Books is a production-ready e-commerce bookstore featuring:
 
-The application features a full shopping experience with product browsing, filtering, cart management, checkout flow, and user authentication pages—all built with accessibility and responsive design principles.
+- **32 carefully curated books** spanning Fiction, Nonfiction, Technology, Science, and more
+- **14 distinct categories** including Mystery, Fantasy, Business, Psychology, and History
+- **Premium minimalist design** with green brand identity and warm ivory backgrounds
+- **Advanced search and filtering** by title, author, and category
+- **Responsive layouts** optimized for mobile, tablet, and desktop
+- **Shopping cart functionality** with persistent state and quantity management
+- **Real book metadata** including authors, formats, page counts, and accurate descriptions
 
-### Live Demo
-- **Development**: `http://localhost:5173`
-- **Production**: Optimized Vite build ready for deployment
+### Design Philosophy
+
+- **Premium & Editorial**: Inspired by independent bookstores and literary magazines
+- **Green Color Palette**: Forest green primary with sage and lime accents
+- **Warm Backgrounds**: Ivory and off-white tones create a welcoming atmosphere
+- **Elegant Typography**: Inter font with careful tracking and spacing
+- **Book-First Design**: Portrait aspect ratios (2:3) and cover-focused layouts
+- **Refined Interactions**: Subtle animations, gentle shadows, and thoughtful hover states
 
 ---
 
 ## ✨ Features
 
-### Core Functionality
-- 🛍️ **Product Catalog**: Browse 8+ curated audio products with detailed specifications
-- 🔍 **Dynamic Filtering**: Real-time category filter (All, Audio, Headphones, Earbuds) using React state
-- 🔎 **Search**: Instant search functionality across product titles
-- 🎚️ **Quantity Control**: Custom controlled stepper component with increment/decrement buttons
-- 🛒 **Shopping Cart**: Full cart management with add, update, remove, and checkout operations
-- 💾 **Cart Persistence**: Automatic localStorage synchronization across sessions
-- 📱 **Responsive Design**: Mobile-first approach with Tailwind breakpoint utilities
-- 🧭 **Multi-Page Routing**: Six-page application with React Router v6
+### Book Discovery
+- 🔍 **Advanced Search**: Search by title, author, or topic with live suggestions
+- 🏷️ **Category Filtering**: Browse 14 literary genres (Fiction, Mystery, Science Fiction, Fantasy, Business, Technology, Psychology, History, etc.)
+- 📊 **Smart Sorting**: View all books or filter by specific categories
+- 🎯 **Search Suggestions**: Dropdown with book cover thumbnails, titles, authors, and prices
 
-### Advanced Features
-- 📢 **Toast Notifications**: User feedback for cart operations
-- 🎨 **Hero Slider**: Dynamic banner component for promotions
-- 🔐 **Authentication UI**: Login and Register page layouts
+### Book Presentation
+- 📚 **Portrait Book Covers**: Authentic covers in 2:3 aspect ratio
+- ✍️ **Author Attribution**: Author names displayed prominently on every card
+- 🏆 **Badges**: Bestseller (lime), New Arrival (sage), and Sale (primary green) indicators
+- 📖 **Detailed Pages**: Format, page count, and comprehensive book descriptions
+- 💰 **Pricing**: Clear price display with sale indicators and savings percentage
+
+### Shopping Experience
+- 🛒 **Shopping Cart**: Full cart management with add, update, remove operations
+- 💾 **Persistent Cart**: Automatic localStorage synchronization across sessions
+- 🎚️ **Quantity Control**: Custom stepper component with increment/decrement
+- 📢 **Toast Notifications**: User feedback for all cart operations
+- 📱 **Responsive Design**: Mobile-first approach optimized for all devices
+
+### User Interface
+- 🎨 **Literary Hero Section**: Editorial-style hero with "Find Your Next Favorite Book"
+- 🎭 **Loading States**: Smooth UX with async operation handling
 - 🚫 **404 Handling**: Custom Not Found page with navigation
 - ♿ **Accessibility**: Semantic HTML and ARIA labels throughout
-- 🎭 **Loading States**: Smooth UX with async operation handling
-
-### Technical Highlights
-- **Context API + Custom Hooks**: Professional state management pattern
-- **Zero Props Drilling**: Clean component composition via context
-- **Separation of Concerns**: Business logic isolated from UI components
-- **Lazy Initialization**: Optimized state hydration from localStorage
-- **Pure Functions**: Predictable state updates with no side effects
-- **Error Boundaries**: Graceful error handling throughout
-
----
-
-## 🏗️ Architecture
-
-This application follows a **Custom Hook + Context API** pattern for scalable, maintainable state management:
-
-```
-App (Providers Only)
-└── BrowserRouter
-    └── CartProvider (Context + Custom Hook)
-        └── MainLayout (UI Structure)
-            ├── Header (Cart Badge)
-            ├── Routes
-            │   ├── Home (Product Grid + Filters)
-            │   ├── Product (Detail Page)
-            │   ├── CartPage (Checkout Flow)
-            │   ├── Login
-            │   ├── Register
-            │   └── NotFound
-            └── Footer
-```
-
-### Key Architectural Decisions
-
-1. **Layouts Folder**: Separates page structure from app configuration
-   - Enables multiple layouts (public, admin, auth, checkout)
-   - Single Responsibility Principle for App.jsx
-   - Scalable for future feature additions
-
-2. **Custom Hook (useCart)**: Encapsulates all cart business logic
-   - Testable in isolation
-   - Reusable across components
-   - Single source of truth for cart operations
-
-3. **Context Provider**: Eliminates props drilling
-   - Global cart state access
-   - Clean component APIs
-   - Reactive updates throughout the tree
-
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed documentation.
+- 🌓 **Hover Effects**: Subtle scale and shadow transitions
 
 ---
 
@@ -110,62 +79,136 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed documentation.
 |------------|---------|---------|
 | **React** | 18.3.1 | UI library with hooks and concurrent features |
 | **Vite** | 5.4.10 | Lightning-fast build tool and dev server |
-| **Tailwind CSS** | 3.4.14 | Utility-first CSS framework |
+| **Tailwind CSS** | 4.3.3 | Utility-first CSS framework |
 | **React Router** | 6.27.0 | Declarative client-side routing |
-| **PostCSS** | 8.4.47 | CSS processing with Autoprefixer |
-| **JavaScript (ES2022+)** | - | Modern JavaScript without TypeScript |
+| **Context API** | - | State management for shopping cart |
 
-### Why These Technologies?
-
-- **Vite**: 10-20x faster than traditional bundlers, instant HMR
-- **Tailwind**: Rapid UI development, consistent design system, optimal CSS output
-- **React 18**: Concurrent rendering, automatic batching, improved Suspense
-- **Plain JavaScript**: Reduced complexity, faster learning curve, smaller bundle size
+**Why These Technologies?**
+- **Vite**: 10-20x faster than traditional bundlers with instant HMR
+- **Tailwind 4**: Rapid UI development with consistent design system
+- **React 18**: Concurrent rendering and automatic batching
+- **Context API + Custom Hooks**: Professional state management pattern
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js**: v16.0.0 or higher
-- **npm**: v7.0.0 or higher (comes with Node.js)
+- Node.js 16+ and npm 7+
 
 ### Installation
 
-1. **Clone or extract the project**
-   ```bash
-   cd assignment
-   ```
+```bash
+# Install dependencies
+npm install
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Start development server
+npm run dev
 
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
+# Build for production
+npm run build
 
-4. **Open in browser**
-   ```
-   http://localhost:5173
-   ```
+# Preview production build
+npm run preview
+```
+
+The development server runs at `http://localhost:5173` (or next available port).
 
 ### Available Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start Vite dev server with HMR on port 5173 |
-| `npm run build` | Production build to `dist/` folder |
-| `npm run preview` | Preview production build locally |
+| `npm run dev` | Start dev server with hot reload |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build |   
 
-### Build Output
-```bash
-npm run build
-# Creates optimized bundle in dist/
-# Ready for deployment to Vercel, Netlify, or any static host
+---
+
+## 📚 Book Catalog
+
+### Fiction (15 books)
+**Contemporary Fiction**
+- *The Midnight Library* by Matt Haig
+- *Normal People* by Sally Rooney
+- *Tomorrow, and Tomorrow, and Tomorrow* by Gabrielle Zevin
+
+**Mystery & Thriller**
+- *The Silent Patient* by Alex Michaelides
+- *Gone Girl* by Gillian Flynn
+
+**Science Fiction**
+- *Dune* by Frank Herbert
+- *Project Hail Mary* by Andy Weir
+
+**Fantasy**
+- *The Name of the Wind* by Patrick Rothfuss
+- *The Way of Kings* by Brandon Sanderson
+- *The Hobbit* by J.R.R. Tolkien
+
+**Historical Fiction**
+- *All the Light We Cannot See* by Anthony Doerr
+- *The Seven Husbands of Evelyn Hugo* by Taylor Jenkins Reid
+
+**Classics**
+- *1984* by George Orwell
+- *The Great Gatsby* by F. Scott Fitzgerald
+- *The Alchemist* by Paulo Coelho
+
+### Nonfiction (17 books)
+**Business & Productivity**
+- *Atomic Habits* by James Clear
+- *Deep Work* by Cal Newport
+- *The Psychology of Money* by Morgan Housel
+- *The Lean Startup* by Eric Ries
+
+**Technology & Programming**
+- *Clean Code* by Robert C. Martin
+- *The Pragmatic Programmer* by David Thomas & Andrew Hunt
+- *Designing Data-Intensive Applications* by Martin Kleppmann
+
+**Science & History**
+- *Sapiens* by Yuval Noah Harari
+- *The Gene* by Siddhartha Mukherjee
+- *Cosmos* by Carl Sagan
+
+**Psychology & Philosophy**
+- *Thinking, Fast and Slow* by Daniel Kahneman
+- *Man's Search for Meaning* by Viktor E. Frankl
+- *Meditations* by Marcus Aurelius
+
+**Biography & Self-Help**
+- *Educated* by Tara Westover
+- *When Breath Becomes Air* by Paul Kalanithi
+- *Range* by David Epstein
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+```css
+Primary Green:  #183D32  /* Forest green for headers and CTAs */
+Sage Green:     #A8B5A0  /* Muted accents for secondary elements */
+Lime Green:     #C5E86C  /* Vibrant accent for badges */
+Warm Ivory:     #F8F8F3  /* Main background */
+Warm Ivory Alt: #EFEFE6  /* Secondary background */
+
+Text Primary:   #20231F  /* Main text */
+Text Secondary: #5A5D58  /* Supporting text */
+Text Tertiary:  #898C87  /* Labels and hints */
 ```
+
+### Typography
+- **Font Family**: Inter with careful letter-spacing
+- **Headings**: Semibold weight (600) with tight tracking (-0.01em)
+- **Body Text**: Regular to medium weights with relaxed line-height
+- **Labels**: Uppercase with wide letter-spacing (0.15-0.2em) for editorial feel
+
+### Responsive Grid
+- **Mobile** (<640px): 2 columns
+- **Tablet** (640-1024px): 3 columns
+- **Desktop** (>1024px): 4 columns
+- **Large Desktop**: 4-5 columns with generous whitespace
 
 ---
 
@@ -174,237 +217,230 @@ npm run build
 ```
 assignment/
 ├── src/
-│   ├── App.jsx                      # Root component with providers
-│   ├── main.jsx                     # React DOM entry point
-│   ├── index.css                    # Tailwind directives
-│   │
-│   ├── context/
-│   │   └── CartContext.jsx          # Cart state provider + hook export
-│   │
-│   ├── hooks/
-│   │   └── useCart.js               # Cart business logic (isolated)
-│   │
-│   ├── layouts/
-│   │   └── MainLayout.jsx           # Main app layout with routing
-│   │
 │   ├── components/
-│   │   ├── Header.jsx               # Site header with cart badge
-│   │   ├── Footer.jsx               # Site footer with links
-│   │   ├── Slider.jsx               # Hero banner carousel
-│   │   ├── Toast.jsx                # Notification component
-│   │   ├── QuantityStepper.jsx      # Controlled quantity input
+│   │   ├── Header.jsx              # Navigation with PageTurner Books branding
+│   │   ├── Footer.jsx              # Site footer
+│   │   ├── SearchBar.jsx           # Book search with author matching
+│   │   ├── Slider.jsx              # Hero section with featured book
+│   │   ├── QuantityStepper.jsx     # Quantity selector
+│   │   ├── Toast.jsx               # Notification system
 │   │   └── product_card/
-│   │       └── ProductCard.jsx      # Product display with add to cart
+│   │       └── ProductCard.jsx     # Book card with portrait cover
 │   │
 │   ├── pages/
-│   │   ├── Home.jsx                 # Product grid with filters
-│   │   ├── Product.jsx              # Product detail page
-│   │   ├── CartPage.jsx             # Shopping cart and checkout
-│   │   ├── Login.jsx                # Login form UI
-│   │   ├── Register.jsx             # Registration form UI
-│   │   └── Notfound.jsx             # 404 error page
+│   │   ├── Home.jsx                # Homepage with catalog and filters
+│   │   ├── Product.jsx             # Book detail page
+│   │   ├── CartPage.jsx            # Shopping cart
+│   │   ├── Login.jsx               # Login form
+│   │   ├── Register.jsx            # Registration form
+│   │   └── Notfound.jsx            # 404 page
+│   │
+│   ├── context/
+│   │   └── CartContext.jsx         # Shopping cart state provider
+│   │
+│   ├── hooks/
+│   │   └── useCart.js              # Cart operations logic
+│   │
+│   ├── layouts/
+│   │   └── MainLayout.jsx          # Main layout with routing
 │   │
 │   ├── data/
-│   │   └── products.js              # Product data (8 items)
+│   │   └── products.js             # 32 books catalog
 │   │
-│   └── assets/
-│       └── images/
-│           └── errorimg.svg         # 404 illustration
+│   ├── App.jsx                     # Root component with providers
+│   ├── main.jsx                    # React DOM entry point
+│   └── index.css                   # Theme colors and global styles
 │
-├── index.html                       # HTML entry point
-├── vite.config.js                   # Vite configuration
-├── tailwind.config.js               # Tailwind customization
-├── postcss.config.js                # PostCSS plugins
-├── package.json                     # Dependencies and scripts
-├── vercel.json                      # Vercel deployment config
-├── README.md                        # This file
-└── ARCHITECTURE.md                  # Detailed architecture docs
+├── index.html
+├── vite.config.js
+├── package.json
+└── README.md
 ```
 
 ---
 
-## 🧩 Key Components
+## 🏗️ Architecture
 
-### 1. **useCart Hook** (`src/hooks/useCart.js`)
-Custom hook encapsulating all cart operations:
-- State management with lazy initialization
-- localStorage synchronization via useEffect
-- CRUD operations: add, update, remove, checkout
-- Calculations: total price, total count
-- Toast notifications for user feedback
+### State Management Pattern
 
-**Returns:**
+```
+App
+└── BrowserRouter
+    └── CartProvider (Context + Custom Hook)
+        └── MainLayout
+            ├── Header (Cart Badge)
+            ├── Routes
+            │   ├── Home (Book Grid + Filters)
+            │   ├── Product (Detail Page)
+            │   ├── CartPage (Checkout)
+            │   └── ... other routes
+            └── Footer
+```
+
+### Key Components
+
+**useCart Hook** (`src/hooks/useCart.js`)
+- Manages cart state with lazy initialization
+- Handles localStorage synchronization
+- Provides CRUD operations: add, update, remove, checkout
+- Calculates total price and item count
+
+**CartContext** (`src/context/CartContext.jsx`)
+- Wraps app with cart state
+- Eliminates props drilling
+- Exports `useCartContext` hook for components
+
+**Book Data Structure** (`src/data/products.js`)
 ```javascript
 {
-  cartItems,        // Current cart items array
-  totalCartCount,   // Sum of all item quantities
-  totalPrice,       // Calculated total price
-  toast,            // Toast notification state
-  setToast,         // Toast state setter
-  addToCart,        // (product, quantity) => Promise
-  updateQuantity,   // (productId, newQuantity) => void
-  removeItem,       // (productId) => void
-  checkout,         // () => void
-  clearCart         // () => void
+  id: Number,              // Unique identifier
+  title: String,           // Book title
+  author: String,          // Author name
+  description: String,     // Book description
+  price: Number,           // Price in SAR
+  salePrice: Number,       // Original price if on sale
+  image: String,           // Book cover URL
+  category: String,        // Genre/category
+  format: String,          // Paperback, Hardcover, etc.
+  pageCount: Number,       // Number of pages
+  bestseller: Boolean,     // Bestseller flag
+  newArrival: Boolean,     // New arrival flag
+  featured: Boolean        // Featured book flag
 }
 ```
 
-### 2. **CartContext** (`src/context/CartContext.jsx`)
-Context provider wrapping the application:
-- Uses `useCart` hook internally
-- Provides cart state to all descendants
-- Exports `useCartContext` for component consumption
-- Includes safety check (throws error if used outside provider)
+---
 
-**Usage:**
+## 🎨 Customization
+
+### Adding New Books
+
+Edit `src/data/products.js`:
+
 ```javascript
-import { useCartContext } from '../context/CartContext';
-
-function MyComponent() {
-  const { addToCart, cartItems, totalCartCount } = useCartContext();
-  // Component logic
+{
+  id: 33,
+  title: "Your Book Title",
+  author: "Author Name",
+  description: "Compelling book description...",
+  price: 75.00,
+  image: "https://book-cover-url.jpg",
+  category: "Fiction",
+  format: "Paperback",
+  pageCount: 320,
+  bestseller: false,
+  newArrival: true,
 }
 ```
 
-### 3. **MainLayout** (`src/layouts/MainLayout.jsx`)
-Primary layout component handling:
-- All route definitions
-- Header/Footer wrapper
-- Toast notification display
-- Cart count prop passing
+### Adding New Categories
 
-### 4. **QuantityStepper** (`src/components/QuantityStepper.jsx`)
-Controlled component demonstrating:
-- Two-way data binding (value prop + onChange callback)
-- Increment/decrement button handlers
-- Min/max validation (1-99)
-- Disabled state for boundary conditions
+Update the `categories` array in `src/data/products.js`:
 
----
+```javascript
+export const categories = [
+  "All",
+  "Fiction",
+  "Your New Category",
+  // ...
+];
+```
 
-## 🤖 Development Approach
+### Updating Brand Colors
 
-This project was developed using **AI-assisted methodologies** as part of the Frontend Developer Practicum, demonstrating:
+Modify theme variables in `src/index.css`:
 
-### AI-Assisted Development Process
-1. **Requirements Analysis**: Structured decomposition of assignment criteria
-2. **Architecture Planning**: AI-guided architectural pattern selection
-3. **Iterative Development**: Component-by-component implementation with AI pair programming
-4. **Code Review**: AI-assisted code quality checks and refactoring
-5. **Documentation**: Comprehensive documentation generation
+```css
+@theme {
+  --color-primary: #183D32;      /* Main green */
+  --color-sage: #A8B5A0;         /* Sage accent */
+  --color-lime: #C5E86C;         /* Lime highlight */
+  --color-warm: #F8F8F3;         /* Background */
+}
+```
 
-### Best Practices Implemented
-- ✅ Component-driven development
-- ✅ Single Responsibility Principle
-- ✅ DRY (Don't Repeat Yourself)
-- ✅ Separation of Concerns
-- ✅ Semantic HTML5
-- ✅ Accessible UI components
-- ✅ Mobile-first responsive design
-- ✅ Performance optimization
-- ✅ Clean code principles
+### Changing Store Name
 
-### Code Quality Standards
-- Consistent naming conventions (camelCase, PascalCase)
-- JSDoc comments for complex functions
-- Modular file structure
-- No console errors or warnings
-- Linting-ready codebase
-- Production-ready error handling
+Update `src/components/Header.jsx`:
 
----
-
-### Additional Features Delivered
-
-- 🎯 **Advanced State Management**: Context API + Custom Hooks pattern
-- 🎯 **Cart Persistence**: localStorage with lazy initialization
-- 🎯 **User Feedback**: Toast notification system
-- 🎯 **Search Functionality**: Real-time product search
-- 🎯 **Professional UI**: Hero slider, product cards, checkout flow
-- 🎯 **Error Handling**: 404 page, form validation, error boundaries
-- 🎯 **Performance**: Vite optimizations, code splitting ready
-- 🎯 **Documentation**: Comprehensive README + ARCHITECTURE.md
-
----
-
-## 📚 Documentation
-
-### Additional Resources
-
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Complete architecture guide
-  - Data flow diagrams
-  - Pattern explanations
-  - Testing strategies
-  - Future enhancement roadmap
-  - Performance considerations
-
-### Key Concepts Explained
-
-1. **Context API Pattern**: How CartProvider eliminates props drilling
-2. **Custom Hooks**: Separating business logic from UI components
-3. **Lazy Initialization**: Optimizing state hydration from storage
-4. **Controlled Components**: Two-way data binding in React
-5. **Mobile-First Design**: Tailwind's responsive utility approach
-
----
-
-## 🎓 Learning Outcomes
-
-This project demonstrates proficiency in:
-
-- ⚛️ Modern React development (hooks, context, routing)
-- 🎨 Utility-first CSS with Tailwind
-- 🏗️ Clean architecture and design patterns
-- 🧩 Component composition and reusability
-- 📦 Build tooling with Vite
-- 🤖 AI-assisted development workflows
-- 📝 Technical documentation and communication
-- ♿ Web accessibility standards
-- 📱 Responsive design implementation
-- 🧪 Code organization for testability
+```jsx
+<span className="text-base font-semibold">
+  Your Store Name
+</span>
+<span className="text-xs text-text-tertiary">
+  Your Tagline
+</span>
+```
 
 ---
 
 ## 🚢 Deployment
 
-This project is deployment-ready for:
+The project is deployment-ready for:
 
-- **Vercel**: `vercel.json` included, zero-config deployment
-- **Netlify**: Build command: `npm run build`, Publish directory: `dist`
-- **GitHub Pages**: Use `vite-plugin-gh-pages` or manual deployment
-- **Any Static Host**: Build output in `dist/` is fully static
-
-### Deploy to Vercel
+**Vercel** (Recommended)
 ```bash
 npm install -g vercel
 vercel
 ```
 
+**Netlify**
+- Build command: `npm run build`
+- Publish directory: `dist`
+
+**Other Static Hosts**
+```bash
+npm run build
+# Upload contents of dist/ folder
+```
+
+The build creates an optimized production bundle in the `dist/` folder.
+
 ---
 
-## 👨‍💻 Assignment Information
+## 📊 Performance
 
-**Course**: AI-Assisted Frontend Developer Practicum  
-**Project**: E-Commerce Application with Modern React Stack  
-**Technologies**: React 18, Vite 5, Tailwind CSS 3, React Router 6  
-**Development Method**: AI-assisted pair programming  
-**Code Quality**: Production-ready, follows industry best practices  
+- **Fast Initial Load**: Vite's optimized bundling
+- **Lazy Loading**: Images load on demand
+- **Code Splitting**: Route-based splitting via React Router
+- **Optimized Assets**: CDN-hosted book covers
+- **Smooth Animations**: GPU-accelerated transforms
+- **Persistent Cart**: localStorage with efficient state management
 
 ---
 
-## 📄 License
+## 🎯 Key Features Summary
 
-This project is submitted as an academic assignment for the AI-Assisted Frontend Developer Practicum.
+| Feature | Description |
+|---------|-------------|
+| **Catalog** | 32 authentic books across 14 categories |
+| **Search** | Title, author, and topic search with live suggestions |
+| **Filtering** | 14 literary genre categories |
+| **Book Cards** | Portrait covers (2:3), author names, badges |
+| **Detail Pages** | Format, page count, full descriptions |
+| **Shopping Cart** | Persistent state, quantity management |
+| **Notifications** | Toast messages for cart actions |
+| **Responsive** | Mobile (2 col), tablet (3 col), desktop (4-5 col) |
+| **Design** | Premium minimalist with green brand identity |
 
 ---
 
 ## 🙏 Acknowledgments
 
-- React team for the powerful UI library
-- Vite team for the incredible build tool
-- Tailwind Labs for the CSS framework
-- AI development tools for accelerating the development process
+- Book cover images sourced from Goodreads
+- Hero images from Unsplash
+- Book metadata represents real published works
+- Design inspired by independent bookstores and literary culture
+- Built with React, Vite, and Tailwind CSS
 
 ---
 
-**Note**: This README serves as both project documentation and evidence of comprehensive understanding of modern frontend development practices, architectural patterns, and AI-assisted development workflows.
+## 📄 License
+
+This project is part of an assignment showcasing modern e-commerce development with React.
+
+---
+
+**PageTurner Books** - Where every page is a new adventure 📚
+
+For detailed technical architecture, see [ARCHITECTURE.md](./ARCHITECTURE.md)
