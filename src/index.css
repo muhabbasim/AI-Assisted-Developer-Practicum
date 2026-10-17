@@ -28,6 +28,14 @@
   
   --spacing-18: 4.5rem;
   --spacing-22: 5.5rem;
+  
+  /* Custom responsive breakpoints */
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 @layer base {
@@ -89,6 +97,12 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary;
   }
+  
+  /* Touch target optimization */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 
   /* Toast and dropdown animations */
   @keyframes slide-up {
@@ -145,5 +159,12 @@
     .animate-spin {
       animation: none;
     }
+  }
+  
+  /* Responsive grid helpers */
+  @media (min-width: 375px) {
+    .xs\:gap-4 { gap: 1rem; }
+    .xs\:inline { display: inline; }
+    .xs\:hidden { display: none; }
   }
 }

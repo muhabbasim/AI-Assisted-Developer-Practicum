@@ -22,11 +22,11 @@ function QuantityStepper({ initialValue = 1, onQuantityChange }) {
   };
 
   return (
-    <div className="flex items-center justify-center border border-border rounded-lg overflow-hidden hover:border-primary transition-colors shadow-sm">
+    <div className="flex items-center justify-center border border-border rounded-lg overflow-hidden hover:border-primary transition-colors shadow-sm touch-manipulation">
       <button
         type="button"
         onClick={decrement}
-        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base cursor-pointer"
+        className="px-3 py-2 sm:px-4 sm:py-2.5 text-text-primary hover:bg-sage/20 active:bg-sage/30 transition-all duration-200 font-normal text-sm sm:text-base cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Decrease quantity"
       >
         &minus;
@@ -35,13 +35,13 @@ function QuantityStepper({ initialValue = 1, onQuantityChange }) {
         type="number"
         value={quantity}
         onChange={handleChange}
-        className="w-14 text-center bg-transparent py-2.5 text-sm font-medium text-text-primary focus:outline-none"
+        className="w-12 sm:w-14 text-center bg-transparent py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-text-primary focus:outline-none"
         aria-label="Quantity"
       />
       <button
         type="button"
         onClick={increment}
-        className="px-4 py-2.5 text-text-primary hover:bg-sage/20 transition-all duration-200 font-normal text-base cursor-pointer"
+        className="px-3 py-2 sm:px-4 sm:py-2.5 text-text-primary hover:bg-sage/20 active:bg-sage/30 transition-all duration-200 font-normal text-sm sm:text-base cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Increase quantity"
       >
         &#43;
