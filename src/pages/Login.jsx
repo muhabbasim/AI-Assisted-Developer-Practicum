@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,19 +19,23 @@ function Login() {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user types
+    // Clear errors when user types
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
         [name]: '',
       }));
     }
+    if (apiError) {
+      setApiError('');
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
+    // Client-side validation
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -45,9 +53,22 @@ function Login() {
       return;
     }
 
-    // Simulate login
-    alert('Login successful!');
-    navigate('/');
+    // API call
+    setIsLoading(true);
+    setApiError('');
+
+    const result = await login({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    setIsLoading(false);
+
+    if (result.success) {
+      navigate('/');
+    } else {
+      setApiError(result.error || 'Login failed. Please try again.');
+    }
   };
 
   return (
@@ -60,6 +81,13 @@ function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* API Error Message */}
+            {apiError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                {apiError}
+              </div>
+            )}
+
             <div>
               <label htmlFor="email" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">
                 Email
@@ -70,7 +98,8 @@ function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="input-field"
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="example@example.com"
               />
               {errors.email && <p className="text-primary text-xs mt-2">{errors.email}</p>}
@@ -86,7 +115,8 @@ function Login() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="input-field"
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="******"
               />
               {errors.password && <p className="text-primary text-xs mt-2">{errors.password}</p>}
@@ -94,9 +124,17 @@ function Login() {
 
             <button
               type="submit"
-              className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer"
+              disabled={isLoading}
+              className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Login
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Logging in...
+                </>
+              ) : (
+                'Login'
+              )}
             </button>
 
             <p className="text-center text-sm text-text-secondary pt-4">

@@ -1,30 +1,39 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Register() {
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear errors when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    if (apiError) {
+      setApiError('');
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.username || formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
+    // Client-side validation
+    if (!formData.name || formData.name.length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
     }
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Valid email is required';
@@ -41,8 +50,23 @@ function Register() {
       return;
     }
 
-    alert('Registration successful! Please login.');
-    navigate('/login');
+    // API call
+    setIsLoading(true);
+    setApiError('');
+
+    const result = await register({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    });
+
+    setIsLoading(false);
+
+    if (result.success) {
+      navigate('/');
+    } else {
+      setApiError(result.error || 'Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -55,39 +79,90 @@ function Register() {
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* API Error Message */}
+            {apiError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                {apiError}
+              </div>
+            )}
+
             <div>
-              <label htmlFor="username" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">Username</label>
-              <input type="text" id="username" name="username" value={formData.username} onChange={handleChange}
-                className="input-field"
-                placeholder="johndoe" />
-              {errors.username && <p className="text-primary text-xs mt-2">{errors.username}</p>}
+              <label htmlFor="name" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">Full Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value={formData.name} 
+                onChange={handleChange}
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
+                placeholder="Your full name" 
+              />
+              {errors.name && <p className="text-primary text-xs mt-2">{errors.name}</p>}
             </div>
+
             <div>
               <label htmlFor="email" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">Email</label>
-              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange}
-                className="input-field"
-                placeholder="example@example.com" />
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange}
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
+                placeholder="example@example.com" 
+              />
               {errors.email && <p className="text-primary text-xs mt-2">{errors.email}</p>}
             </div>
+
             <div>
               <label htmlFor="password" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">Password</label>
-              <input type="password" id="password" name="password" value={formData.password} onChange={handleChange}
-                className="input-field"
-                placeholder="******" />
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                value={formData.password} 
+                onChange={handleChange}
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
+                placeholder="******" 
+              />
               {errors.password && <p className="text-primary text-xs mt-2">{errors.password}</p>}
             </div>
+
             <div>
               <label htmlFor="confirmPassword" className="block text-xs font-medium text-text-primary mb-2 uppercase tracking-wide">Confirm Password</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange}
-                className="input-field"
-                placeholder="******" />
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                name="confirmPassword" 
+                value={formData.confirmPassword} 
+                onChange={handleChange}
+                disabled={isLoading}
+                className="input-field disabled:opacity-50 disabled:cursor-not-allowed"
+                placeholder="******" 
+              />
               {errors.confirmPassword && <p className="text-primary text-xs mt-2">{errors.confirmPassword}</p>}
             </div>
-            <button type="submit" className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer">
-              Register
+
+            <button 
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-primary hover:bg-primary-dark text-white py-3.5 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 mt-8 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Creating account...
+                </>
+              ) : (
+                'Register'
+              )}
             </button>
+
             <p className="text-center text-sm text-text-secondary pt-4">
-              Already have an account? <Link to="/login" className="text-primary hover:text-primary-dark font-medium">Login</Link>
+              Already have an account? <Link to="/login" className="text-primary hover:text-primary-dark font-medium cursor-pointer">Login</Link>
             </p>
           </form>
         </div>
