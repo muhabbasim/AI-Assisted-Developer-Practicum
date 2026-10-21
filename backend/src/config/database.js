@@ -1,3 +1,7 @@
+// Load environment variables FIRST, before any other imports
+import dotenv from 'dotenv';
+dotenv.config();
+
 import pkg from 'pg';
 const { Pool } = pkg;
 
@@ -20,6 +24,7 @@ pool.on('error', (err) => {
 // Initialize database tables
 const initializeTables = async () => {
   const client = await pool.connect();
+  
   try {
     await client.query('BEGIN');
 

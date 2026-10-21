@@ -50,7 +50,7 @@ REST API built with Node.js, Express, and PostgreSQL for an e-commerce applicati
    npm run dev
    ```
 
-   The API will run on `http://localhost:5000`
+   The API will run on `http://localhost:5001`
 
 ## API Endpoints
 
