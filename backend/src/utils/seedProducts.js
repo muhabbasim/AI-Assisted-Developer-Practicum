@@ -1,6 +1,4 @@
 import { pool } from '../config/database.js';
-import dotenv from 'dotenv';
-dotenv.config();
 
 // Products data migrated from frontend
 const products = [
