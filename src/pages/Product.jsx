@@ -116,7 +116,7 @@ function Product() {
 
             {/* Price */}
             <div className="flex items-baseline gap-3 py-6 border-b border-border">
-              <span className="text-3xl font-semibold text-text-primary">SAR {product.price.toFixed(2)}</span>
+              <span className="text-3xl font-semibold text-text-primary">SAR {Number(product.price).toFixed(2)}</span>
               {product.salePrice && (
                 <>
                   <span className="text-lg text-text-tertiary line-through">SAR {product.salePrice.toFixed(2)}</span>

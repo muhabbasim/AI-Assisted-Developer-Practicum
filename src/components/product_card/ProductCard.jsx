@@ -8,6 +8,10 @@ function ProductCard({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
 
+  // Handle both backend (name) and frontend (title) field names
+  const productTitle = product.name || product.title;
+  const productAuthor = product.author || 'Unknown Author';
+
   const handleAddToCart = async () => {
     if (!isAdding) {
       setIsAdding(true);
@@ -33,7 +37,7 @@ function ProductCard({ product }) {
         <div className="aspect-[2/3] w-full flex items-center justify-center p-3 sm:p-4">
           <img
             src={product.image}
-            alt={`${product.title} by ${product.author}`}
+            alt={`${productTitle} by ${productAuthor}`}
             loading="lazy"
             className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
           />
@@ -68,23 +72,23 @@ function ProductCard({ product }) {
         {/* Title - Consistent height with line clamping */}
         <Link to={`/product/${product.id}`} className="mb-1 sm:mb-1.5 cursor-pointer">
           <h3 className="text-xs sm:text-sm font-semibold text-text-primary line-clamp-2 leading-snug sm:leading-relaxed group-hover:text-primary transition-colors duration-300 min-h-[2.25rem] sm:min-h-[2.5rem]">
-            {product.title}
+            {productTitle}
           </h3>
         </Link>
 
         {/* Author */}
         <p className="text-[10px] sm:text-xs text-text-secondary mb-2 sm:mb-3 line-clamp-1">
-          by {product.author}
+          by {productAuthor}
         </p>
 
         {/* Price - Responsive sizing */}
         <div className="flex items-baseline gap-1.5 sm:gap-2.5 mb-3 sm:mb-4">
           <span className="text-sm sm:text-base lg:text-lg font-semibold text-text-primary">
-            SAR {product.price.toFixed(2)}
+            SAR {Number(product.price).toFixed(2)}
           </span>
-          {product.salePrice && (
+          {product.price && (
             <span className="text-[10px] sm:text-xs text-text-tertiary line-through">
-              SAR {product.salePrice.toFixed(2)}
+              SAR {Number(product.price).toFixed(2)}
             </span>
           )}
         </div>

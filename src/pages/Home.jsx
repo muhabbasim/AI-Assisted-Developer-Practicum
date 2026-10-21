@@ -1,28 +1,93 @@
-import { useState } from 'react';
-import { products, categories } from '../data/products';
+import { useState, useEffect } from 'react';
+import { productsAPI } from '../services/api';
 import ProductCard from '../components/product_card/ProductCard';
+import ProductCardSkeleton from '../components/ProductCardSkeleton';
 import Slider from '../components/Slider';
 import SearchBar from '../components/SearchBar';
 
+// Categories from backend
+const categories = [
+  "All",
+  "Fiction",
+  "Mystery",
+  "Science Fiction",
+  "Fantasy",
+  "Business",
+  "Technology",
+  "Psychology",
+  "History",
+  "Self-Help",
+  "Biography",
+  "Science",
+  "Philosophy",
+  "Historical Fiction",
+];
+
 function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
 
-  // Get featured book (first product with featured flag, then sale price, or first)
-  const featuredProduct = products.find(p => p.featured) || products.find(p => p.salePrice) || products[0];
+  // Fetch products from API
+  useEffect(() => {
+    fetchProducts();
+  }, [selectedCategory, search]);
 
-  const filtered = products.filter((p) => {
-    const matchCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchSearch = 
-      p.title.toLowerCase().includes(search.toLowerCase()) ||
-      p.author.toLowerCase().includes(search.toLowerCase()) ||
-      p.category.toLowerCase().includes(search.toLowerCase());
-    return matchCategory && matchSearch;
-  });
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const filters = {};
+      if (selectedCategory !== 'All') {
+        filters.category = selectedCategory;
+      }
+      if (search.trim()) {
+        filters.search = search;
+      }
+
+      const response = await productsAPI.getAll(filters);
+      setProducts(response.products || []);
+    } catch (err) {
+      setError(err.message || 'Failed to load products');
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get featured book (first product or fallback)
+  const featuredProduct = {
+    id: 1,
+    name: "Featured Book",
+    author: "Author Name",
+    price: 65.00,
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1740",
+    description: "Discover our featured collection"
+  };
+
+  const filtered = products;
 
   return (
     <main className="w-full flex-auto">
       <div className="container py-8 sm:py-10">
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg mb-8">
+            <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+              <div>
+                <p className="font-semibold">Error loading products</p>
+                <p className="text-sm">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Literary Hero Section */}
         <div className="mb-12 sm:mb-16">
           <Slider 
@@ -69,7 +134,7 @@ function Home() {
             </div>
 
             {/* Results count - Refined */}
-            {(search || selectedCategory !== 'All') && (
+            {!loading && (search || selectedCategory !== 'All') && (
               <div className="flex items-center gap-4 text-sm">
                 <p className="text-text-tertiary font-medium">
                   {filtered.length} {filtered.length === 1 ? 'book' : 'books'} found
@@ -96,7 +161,14 @@ function Home() {
 
         {/* Product Grid with Scroll Anchor */}
         <div id="products" className="max-w-[1600px] mx-auto">
-          {filtered.length > 0 ? (
+          {loading ? (
+            /* Skeleton Loading State */
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-4 md:gap-5 lg:gap-6">
+              {[...Array(10)].map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : filtered.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 xs:gap-4 sm:gap-4 md:gap-5 lg:gap-6">
               {filtered.map((product) => (
                 <ProductCard key={product.id} product={product} />

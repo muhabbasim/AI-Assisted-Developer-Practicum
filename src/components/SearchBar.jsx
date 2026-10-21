@@ -22,11 +22,16 @@ function SearchBar({ products, onSearch, searchValue }) {
   useEffect(() => {
     if (searchValue.trim().length > 0) {
       const filtered = products
-        .filter(p => 
-          p.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          p.author.toLowerCase().includes(searchValue.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchValue.toLowerCase())
-        )
+        .filter(p => {
+          const title = (p.name || p.title || '').toLowerCase();
+          const author = (p.author || '').toLowerCase();
+          const category = (p.category || '').toLowerCase();
+          const searchLower = searchValue.toLowerCase();
+          
+          return title.includes(searchLower) ||
+                 author.includes(searchLower) ||
+                 category.includes(searchLower);
+        })
         .slice(0, 5); // Show max 5 suggestions
       
       setSuggestions(filtered);
@@ -118,6 +123,8 @@ function SearchBar({ products, onSearch, searchValue }) {
             {/* Suggestions List */}
             <ul className="max-h-[400px] overflow-y-auto">
               {suggestions.map((product) => {
+                const title = product.name || product.title;
+                const author = product.author || 'Unknown Author';
                 const discount = product.salePrice 
                   ? Math.round(((product.salePrice - product.price) / product.salePrice) * 100)
                   : 0;
@@ -133,7 +140,7 @@ function SearchBar({ products, onSearch, searchValue }) {
                       <div className="w-12 h-18 bg-warm-ivory rounded-lg overflow-hidden flex-shrink-0 border border-border/50 relative shadow-sm">
                         <img 
                           src={product.image} 
-                          alt={`${product.title} by ${product.author}`}
+                          alt={`${title} by ${author}`}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
                         {product.salePrice && (
@@ -149,14 +156,14 @@ function SearchBar({ products, onSearch, searchValue }) {
                           {product.category}
                         </p>
                         <h4 className="text-sm font-semibold text-text-primary mb-0.5 line-clamp-1 group-hover:text-primary transition-colors">
-                          {product.title}
+                          {title}
                         </h4>
                         <p className="text-xs text-text-secondary mb-1 line-clamp-1">
-                          by {product.author}
+                          by {author}
                         </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-sm font-bold text-primary">
-                            SAR {product.price.toFixed(2)}
+                            SAR {Number(product.price).toFixed(2)}
                           </span>
                           {product.salePrice && (
                             <span className="text-xs text-text-tertiary line-through">
