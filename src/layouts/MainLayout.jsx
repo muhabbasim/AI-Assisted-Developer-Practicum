@@ -7,6 +7,8 @@ import Home from '../pages/Home';
 import Product from '../pages/Product';
 import CartPage from '../pages/CartPage';
 import Checkout from '../pages/Checkout';
+import Orders from '../pages/Orders';
+import OrderDetail from '../pages/OrderDetail';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Notfound from '../pages/Notfound';
@@ -26,12 +28,35 @@ function MainLayout() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route 
+            path="/cart" 
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            } 
+          />
           <Route 
             path="/checkout" 
             element={
               <ProtectedRoute>
                 <Checkout />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/orders" 
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/orders/:id" 
+            element={
+              <ProtectedRoute>
+                <OrderDetail />
               </ProtectedRoute>
             } 
           />
