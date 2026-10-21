@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import MainLayout from './layouts/MainLayout';
 
@@ -9,9 +10,11 @@ import MainLayout from './layouts/MainLayout';
 function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <MainLayout />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <MainLayout />
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
