@@ -116,13 +116,9 @@ function Slider({ imageSrc, featuredProduct }) {
                       </p>
                       <div className="flex items-baseline gap-2">
                         <span className="text-base font-bold text-primary">
-                          SAR {featuredProduct.price.toFixed(2)}
+                          SAR {Number(featuredProduct.price).toFixed(2)}
                         </span>
-                        {featuredProduct.salePrice && (
-                          <span className="text-xs text-text-tertiary line-through">
-                            SAR {featuredProduct.salePrice.toFixed(2)}
-                          </span>
-                        )}
+                       
                       </div>
                     </div>
                   </div>

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
@@ -12,6 +13,9 @@ function Login() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+
+  // Get redirect message from location state
+  const redirectMessage = location.state?.message;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,7 +69,9 @@ function Login() {
     setIsLoading(false);
 
     if (result.success) {
-      navigate('/');
+      // Redirect back to the page they came from or home
+      const from = location.state?.from || '/';
+      navigate(from);
     } else {
       setApiError(result.error || 'Login failed. Please try again.');
     }
@@ -81,6 +87,13 @@ function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Redirect Message (e.g., from cart checkout) */}
+            {redirectMessage && (
+              <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
+                {redirectMessage}
+              </div>
+            )}
+
             {/* API Error Message */}
             {apiError && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">

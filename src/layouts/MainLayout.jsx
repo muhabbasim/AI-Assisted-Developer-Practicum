@@ -6,9 +6,11 @@ import Toast from '../components/Toast';
 import Home from '../pages/Home';
 import Product from '../pages/Product';
 import CartPage from '../pages/CartPage';
+import Checkout from '../pages/Checkout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Notfound from '../pages/Notfound';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 /**
  * Main Layout Component
@@ -25,6 +27,14 @@ function MainLayout() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route 
+            path="/checkout" 
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<Notfound />} />

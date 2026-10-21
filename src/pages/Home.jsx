@@ -63,14 +63,7 @@ function Home() {
   };
 
   // Get featured book (first product or fallback)
-  const featuredProduct = {
-    id: 1,
-    name: "Featured Book",
-    author: "Author Name",
-    price: 65.00,
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1740",
-    description: "Discover our featured collection"
-  };
+  const featuredProduct = products[0];
 
   const filtered = products;
 

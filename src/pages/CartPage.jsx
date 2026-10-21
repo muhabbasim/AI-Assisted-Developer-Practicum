@@ -1,10 +1,30 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartContext } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import QuantityStepper from '../components/QuantityStepper';
 
 function CartPage() {
-  const { cartItems, totalPrice, updateQuantity, removeItem, checkout } = useCartContext();
+  const { cartItems, totalPrice, updateQuantity, removeItem, loading } = useCartContext();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
+  // Loading state
+  if (loading) {
+    return (
+      <main className="w-full flex-auto">
+        <div className="container py-16 sm:py-24">
+          <div className="flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-text-secondary">Loading cart...</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Empty cart
   if (cartItems.length === 0) {
     return (
       <main className="w-full flex-auto">
@@ -23,6 +43,16 @@ function CartPage() {
       </main>
     );
   }
+
+  const handleCheckout = () => {
+    if (!isAuthenticated) {
+      // Redirect guests to login before checkout
+      navigate('/login', { state: { from: '/cart', message: 'Please login to proceed with checkout' } });
+    } else {
+      // Navigate to checkout page for authenticated users
+      navigate('/checkout');
+    }
+  };
 
   return (
     <main className="w-full flex-auto">
@@ -44,7 +74,7 @@ function CartPage() {
                   <div className="w-full sm:w-32 h-32 bg-warm-ivory rounded-xl overflow-hidden">
                     <img
                       src={item.product.image}
-                      alt={item.product.title}
+                      alt={item.product.name}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -57,7 +87,7 @@ function CartPage() {
                       to={`/product/${item.product.id}`}
                       className="text-base font-medium text-text-primary hover:text-primary transition-colors cursor-pointer"
                     >
-                      {item.product.title}
+                      {item.product.name}
                     </Link>
                     <p className="text-sm text-text-tertiary mt-1.5 uppercase tracking-wide">{item.product.category}</p>
                   </div>
@@ -112,11 +142,17 @@ function CartPage() {
 
               <button
                 type="button"
-                onClick={checkout}
+                onClick={handleCheckout}
                 className="w-full bg-primary hover:bg-primary-dark text-white py-4 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
               >
-                Proceed to Checkout
+                {isAuthenticated ? 'Proceed to Checkout' : 'Login to Checkout'}
               </button>
+
+              {!isAuthenticated && (
+                <p className="text-xs text-text-tertiary text-center">
+                  You need to login to complete your purchase
+                </p>
+              )}
 
               <Link to="/" className="block text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-white cursor-pointer">
                 ← Continue Shopping
