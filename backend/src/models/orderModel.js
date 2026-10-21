@@ -1,4 +1,4 @@
-const { pool } = require('../config/database');
+import { pool } from '../config/database.js';
 
 const orderModel = {
   // Create order with items (transaction)
@@ -95,4 +95,4 @@ const orderModel = {
   }
 };
 
-module.exports = orderModel;
+export default orderModel;

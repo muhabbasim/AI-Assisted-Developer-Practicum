@@ -1,4 +1,4 @@
-const { pool } = require('../config/database');
+import { pool } from '../config/database.js';
 
 const productModel = {
   // Get all products
@@ -55,4 +55,4 @@ const productModel = {
   }
 };
 
-module.exports = productModel;
+export default productModel;

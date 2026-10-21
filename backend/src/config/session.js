@@ -1,7 +1,10 @@
-const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
-const { pool } = require('./database');
-require('dotenv').config();
+import session from 'express-session';
+import connectPgSimple from 'connect-pg-simple';
+import { pool } from './database.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const pgSession = connectPgSimple(session);
 
 const sessionConfig = {
   store: new pgSession({
@@ -20,4 +23,4 @@ const sessionConfig = {
   }
 };
 
-module.exports = sessionConfig;
+export default sessionConfig;
