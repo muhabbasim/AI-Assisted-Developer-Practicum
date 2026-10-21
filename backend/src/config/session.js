@@ -1,0 +1,23 @@
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const { pool } = require('./database');
+require('dotenv').config();
+
+const sessionConfig = {
+  store: new pgSession({
+    pool: pool,
+    tableName: 'session',
+    createTableIfMissing: false // We create it manually in database.js
+  }),
+  secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+  }
+};
+
+module.exports = sessionConfig;
