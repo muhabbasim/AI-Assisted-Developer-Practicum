@@ -4,6 +4,7 @@ import ProductCard from '../components/product_card/ProductCard';
 import ProductCardSkeleton from '../components/ProductCardSkeleton';
 import Slider from '../components/Slider';
 import SearchBar from '../components/SearchBar';
+import useDebounce from '../hooks/useDebounce';
 
 // Categories from backend
 const categories = [
@@ -29,11 +30,14 @@ function Home() {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
+  
+  // Debounce search input to avoid excessive API calls
+  const debouncedSearch = useDebounce(search, 1000);
 
   // Fetch products from API
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory, search]);
+  }, [selectedCategory, debouncedSearch]);
 
   const fetchProducts = async () => {
     try {
@@ -44,8 +48,8 @@ function Home() {
       if (selectedCategory !== 'All') {
         filters.category = selectedCategory;
       }
-      if (search.trim()) {
-        filters.search = search;
+      if (debouncedSearch.trim()) {
+        filters.search = debouncedSearch;
       }
 
       const response = await productsAPI.getAll(filters);
