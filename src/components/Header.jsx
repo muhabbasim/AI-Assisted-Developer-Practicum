@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Header({ cartCount = 0 }) {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user, logout, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -56,33 +56,37 @@ function Header({ cartCount = 0 }) {
               )}
             </Link>
 
-            {isAuthenticated ? (
+            {!loading && (
               <>
-                <Link 
-                  to="/orders" 
-                  className="text-sm font-medium text-text-secondary hover:text-primary transition-colors hidden md:block px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
-                >
-                  Orders
-                </Link>
-                <span className="text-sm text-text-secondary hidden lg:block">
-                  Welcome, {user?.name}
-                </span>
-             
-                <button
-                  onClick={handleLogout}
-                  className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link 
-                  to="/login" 
-                  className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
-                >
-                  Login
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link 
+                      to="/orders" 
+                      className="text-sm font-medium text-text-secondary hover:text-primary transition-colors hidden md:block px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
+                    >
+                      Orders
+                    </Link>
+                    <span className="text-sm text-text-secondary hidden lg:block">
+                      Welcome, {user?.name}
+                    </span>
+                 
+                    <button
+                      onClick={handleLogout}
+                      className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link 
+                      to="/login" 
+                      className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-warm cursor-pointer"
+                    >
+                      Login
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </nav>

@@ -3,6 +3,7 @@ import { useCartContext } from '../context/CartContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Toast from '../components/Toast';
+import ScrollToTop from '../components/ScrollToTop';
 import Home from '../pages/Home';
 import Product from '../pages/Product';
 import CartPage from '../pages/CartPage';
@@ -23,6 +24,7 @@ function MainLayout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-warm overflow-x-hidden">
+      <ScrollToTop />
       <Header cartCount={totalCartCount} />
       <div className="flex-1 pt-16 sm:pt-18">
         <Routes>
