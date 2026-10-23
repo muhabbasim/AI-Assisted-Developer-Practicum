@@ -3,7 +3,13 @@
  * All API calls go through this service
  */
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+// const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+  throw new Error("VITE_API_URL environment variable is not configured.");
+}
 
 /**
  * Base fetch wrapper with credentials
