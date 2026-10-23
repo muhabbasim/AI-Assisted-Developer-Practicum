@@ -31,9 +31,9 @@ function MainLayout() {
           <Route 
             path="/cart" 
             element={
-              <ProtectedRoute>
+              // <ProtectedRoute>
                 <CartPage />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             } 
           />
           <Route 
