@@ -12,7 +12,7 @@ function Footer() {
               <div className="w-8 h-8 bg-lime rounded-lg flex items-center justify-center">
                 <div className="w-5 h-5 bg-primary rounded-sm"></div>
               </div>
-              <span className="text-base font-semibold tracking-tight">Beautiful Store</span>
+              <span className="text-base font-semibold tracking-tight">Novelle</span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed max-w-xs">
               Your destination for premium audio experiences and beautiful products.
@@ -49,7 +49,7 @@ function Footer() {
           <div className="space-y-5">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white/90">Contact</h3>
             <div className="flex flex-col gap-3 text-sm text-white/70">
-              <p>info@beautifulstore.com</p>
+              <p>info@Novelle.com</p>
               <p>+966 50 123 4567</p>
             </div>
           </div>
@@ -59,7 +59,7 @@ function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/60">
             <p>
-              &copy; {new Date().getFullYear()} The Beautiful Experience Store. All rights reserved.
+              &copy; {new Date().getFullYear()} Novelle. All rights reserved.
             </p>
             <div className="flex gap-6">
               <span className="hover:text-white/90 cursor-pointer transition-colors">Privacy Policy</span>

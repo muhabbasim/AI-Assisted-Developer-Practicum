@@ -1,4 +1,4 @@
-# PageTurner Books - Online Bookstore
+# Novelle - Online Bookstore
 
 A sophisticated, modern online bookstore built with React, featuring a curated collection of 32 books across multiple genres. This project showcases a premium reading destination with elegant design, intuitive discovery, and seamless shopping experience.
 
@@ -21,7 +21,7 @@ A sophisticated, modern online bookstore built with React, featuring a curated c
 
 ## 🎯 Overview
 
-PageTurner Books is a production-ready e-commerce bookstore featuring:
+Novelle Books is a production-ready e-commerce bookstore featuring:
 
 - **32 carefully curated books** spanning Fiction, Nonfiction, Technology, Science, and more
 - **14 distinct categories** including Mystery, Fantasy, Business, Psychology, and History
@@ -218,7 +218,7 @@ Text Tertiary:  #898C87  /* Labels and hints */
 assignment/
 ├── src/
 │   ├── components/
-│   │   ├── Header.jsx              # Navigation with PageTurner Books branding
+│   │   ├── Header.jsx              # Navigation with Novelle branding
 │   │   ├── Footer.jsx              # Site footer
 │   │   ├── SearchBar.jsx           # Book search with author matching
 │   │   ├── Slider.jsx              # Hero section with featured book
@@ -441,6 +441,6 @@ This project is part of an assignment showcasing modern e-commerce development w
 
 ---
 
-**PageTurner Books** - Where every page is a new adventure 📚
+**Novelle** - Where every page is a new adventure 📚
 
 For detailed technical architecture, see [ARCHITECTURE.md](./ARCHITECTURE.md)
