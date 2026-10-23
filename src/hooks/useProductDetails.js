@@ -56,7 +56,9 @@ function useProductDetails() {
     quantity,
     setQuantity,
     isAdding,
-    handleAddToCart
+    handleAddToCart,
+    loading,
+    error
   };
 }
 

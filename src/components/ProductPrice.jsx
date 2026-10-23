@@ -8,8 +8,20 @@ function calculateDiscount(salePrice, price) {
   return Math.round(((salePrice - price) / salePrice) * 100);
 }
 
-function ProductPrice({ price, salePrice }) {
+function ProductPrice({ price, salePrice, loading = false }) {
   const discount = salePrice ? calculateDiscount(salePrice, price) : 0;
+
+  if (loading) {
+    return (
+      <div
+        className="flex items-baseline gap-3 py-6 border-b border-border animate-pulse"
+        aria-busy="true"
+        aria-label="Loading product price"
+      >
+        <div className="h-9 w-32 rounded-md bg-stone-200" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-baseline gap-3 py-6 border-b border-border">

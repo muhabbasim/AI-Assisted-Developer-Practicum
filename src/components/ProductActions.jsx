@@ -2,13 +2,34 @@ import { Link } from 'react-router-dom';
 import QuantityStepper from './QuantityStepper';
 import AddToCartButton from './AddToCartButton';
 
-function ProductActions({ 
-  quantity, 
-  onQuantityChange, 
-  onAddToCart, 
+function ProductActions({
+  quantity,
+  onQuantityChange,
+  onAddToCart,
   isAdding,
-  continueBrowsingLink = '/'
+  loading = false,
+  continueBrowsingLink = '/',
 }) {
+  if (loading) {
+    return (
+      <div
+        className="space-y-6 animate-pulse"
+        aria-busy="true"
+        aria-label="Loading product actions"
+      >
+        {/* Quantity Stepper Skeleton */}
+        <div className="flex flex-col gap-3 max-w-xs">
+          <div className="h-4 w-20 rounded bg-stone-200" />
+          <div className="h-12 w-full rounded-lg bg-stone-200" />
+        </div>
+        {/* Action Buttons Skeleton */}
+        <div className="flex flex-col gap-4">
+          <div className="h-12 w-full rounded-lg bg-stone-200" />
+          <div className="h-10 w-full rounded-lg bg-stone-100" />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="space-y-6">
       {/* Quantity Stepper */}
@@ -16,34 +37,32 @@ function ProductActions({
         <label className="text-sm font-medium text-text-primary uppercase tracking-wide">
           Quantity
         </label>
-        <QuantityStepper 
-          initialValue={quantity} 
-          onQuantityChange={onQuantityChange} 
+        <QuantityStepper
+          initialValue={quantity}
+          onQuantityChange={onQuantityChange}
         />
       </div>
-
       {/* Add to Cart Button */}
       <div className="flex flex-col gap-4">
-        <AddToCartButton 
+        <AddToCartButton
           onAddToCart={onAddToCart}
           isAdding={isAdding}
         />
-
-        <Link 
-          to={continueBrowsingLink} 
+        <Link
+          to={continueBrowsingLink}
           className="text-center text-sm text-text-secondary hover:text-primary transition-colors py-2 rounded-lg hover:bg-warm inline-flex items-center justify-center gap-2 cursor-pointer"
         >
-          <svg 
-            className="w-4 h-4" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24" 
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
             strokeWidth={2}
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
           Continue Browsing

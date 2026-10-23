@@ -9,7 +9,9 @@ function Product() {
     quantity, 
     setQuantity, 
     isAdding, 
-    handleAddToCart 
+    handleAddToCart,
+    loading, 
+    error
   } = useProductDetails();
 
   // Show not found if product doesn't exist
@@ -28,7 +30,7 @@ function Product() {
       <div className="container py-8 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Product Image */}
-          <ProductImage product={product} />
+          <ProductImage product={product} loading={loading} error={error} />
 
           {/* Product Details */}
           <ProductDetails
@@ -37,6 +39,8 @@ function Product() {
             onQuantityChange={setQuantity}
             onAddToCart={handleAddToCart}
             isAdding={isAdding}
+            loading={loading}
+            error={error}
           />
         </div>
       </div>
