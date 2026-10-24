@@ -10,7 +10,7 @@ const sessionConfig = {
     tableName: 'session',
     createTableIfMissing: false // We create it manually in database.js
   }),
-  secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {

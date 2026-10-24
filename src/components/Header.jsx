@@ -19,7 +19,7 @@ function Header({ cartCount = 0 }) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group cursor-pointer">
             <div className="w-12 h-12  rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105">
-              <img src="/src/assets/images/novella-logo.svg" alt="logo" />
+              <img src="/favicon.svg" alt="logo" />
             </div>
             <div className="hidden sm:flex flex-col">
               <span className="text-base font-semibold text-text-primary tracking-tight leading-none">
